@@ -34,7 +34,7 @@ name=PyHLA-1.1.1-Source
 wget http://download.savannah.gnu.org/releases/certi/contrib/PyHLA/${name}.tar.gz
 tar xvf ${name}.tar.gz; cd ${name}
 mkdir build; cd build
-cmake -DCMAKE_INSTALL_PREFIX=$_WP ..
+cmake -DPYTHON_EXECUTABLE=/usr/bin/python3.4 -DCMAKE_INSTALL_PREFIX=$_WP ..
 make -j; make install
 
 cd $_WS
