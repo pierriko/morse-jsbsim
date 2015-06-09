@@ -13,10 +13,11 @@ cd jsbsim
 ./autogen.sh --enable-libraries --prefix=$_WP
 make install
 
+# checkout 3.4.3 since 3.5 requires cmake 2.8.11
 cd $_WS
 git clone --depth=5 git://git.savannah.nongnu.org/certi.git -b CERTI-3_4_3
 cd certi
-
+# fix Unknown CMake command "target_include_directories".
 patch -p0 << EOF
 --- CMakeLists.txt
 +++ CMakeLists.txt
