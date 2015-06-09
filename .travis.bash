@@ -11,7 +11,7 @@ cd jsbsim
 make install
 
 cd $_WS
-git clone --depth=5 git://git.savannah.nongnu.org/certi.git
+git clone --depth=5 git://git.savannah.nongnu.org/certi.git -b CERTI-3_4_3
 cd certi
 mkdir build; cd build
 cmake -DCMAKE_INSTALL_PREFIX=$_WP ..
@@ -42,6 +42,7 @@ export PATH=$PATH:$_WP/bin
 
 cd $_WR
 morse import $(pwd)
+
 
 '''
 rtig
