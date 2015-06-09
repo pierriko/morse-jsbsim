@@ -1,8 +1,11 @@
 language: cpp
 
 compiler:
-  - clang
   - gcc
+
+# travis clang version 3.4 does not support parenthesized initialization
+# fix cpp/jsbsim_node.cc:26:4: error
+#  - clang
 
 before_install:
  - sudo add-apt-repository ppa:irie/blender -y
