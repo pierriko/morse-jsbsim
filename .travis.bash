@@ -2,6 +2,9 @@
 export _WR=$(pwd)
 export _WP=$_WR/ws
 export _WS=$_WP/src
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$_WP/lib
+export PATH=$PATH:$_WP/bin
+
 mkdir -p $_WS
 
 cd $_WS
@@ -37,12 +40,10 @@ mkdir build; cd build
 cmake -DCERTI_DIR=$_WP/share/scripts -DJSBSIM_ROOT_DIR=$_WP ..
 make -j
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$_WP/lib
-export PATH=$PATH:$_WP/bin
-
 cd $_WR
 morse import $(pwd)
 
+exit
 
 '''
 rtig
