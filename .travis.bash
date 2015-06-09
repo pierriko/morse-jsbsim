@@ -16,6 +16,15 @@ make install
 cd $_WS
 git clone --depth=5 git://git.savannah.nongnu.org/certi.git -b CERTI-3_4_3
 cd certi
+
+patch -p0 << EOF
+--- CMakeLists.txt
++++ CMakeLists.txt
+@@ -453 +453 @@
+-add_subdirectory( test )
++#add_subdirectory( test )
+EOF
+
 mkdir build; cd build
 cmake -DCMAKE_INSTALL_PREFIX=$_WP ..
 make -j; make install
