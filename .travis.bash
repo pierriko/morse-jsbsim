@@ -7,12 +7,6 @@ export PATH=$PATH:$_WP/bin
 
 mkdir -p $_WS
 
-cd $_WS
-git clone --depth=5 git://git.code.sf.net/p/jsbsim/code jsbsim
-cd jsbsim
-./autogen.sh --enable-libraries --prefix=$_WP
-make install
-
 # checkout 3.4.3 since 3.5 requires cmake 2.8.11
 cd $_WS
 git clone --depth=5 git://git.savannah.nongnu.org/certi.git -b CERTI-3_4_3
@@ -35,8 +29,14 @@ name=PyHLA-1.1.1-Source
 wget http://download.savannah.gnu.org/releases/certi/contrib/PyHLA/${name}.tar.gz
 tar xvf ${name}.tar.gz; cd ${name}
 mkdir build; cd build
-cmake -DPYTHON_EXECUTABLE=/usr/bin/python3.4 -DCMAKE_INSTALL_PREFIX=$_WP ..
+cmake -DPYTHON_EXECUTABLE=/usr/bin/python3.4 -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.4m.so -DCMAKE_INSTALL_PREFIX=$_WP ..
 make -j; make install
+
+cd $_WS
+git clone --depth=5 git://git.code.sf.net/p/jsbsim/code jsbsim
+cd jsbsim
+./autogen.sh --enable-libraries --prefix=$_WP
+make install
 
 cd $_WS
 git clone --depth=5 https://github.com/morse-simulator/morse.git
