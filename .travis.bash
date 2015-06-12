@@ -28,8 +28,27 @@ cd $_WS
 name=PyHLA-1.1.1-Source
 wget http://download.savannah.gnu.org/releases/certi/contrib/PyHLA/${name}.tar.gz
 tar xvf ${name}.tar.gz; cd ${name}
+
+patch -p0 << EOF
+--- CMakeLists.txt
++++ CMakeLists.txt
+@@ -19,12 +18,0 @@
+-EXECUTE_PROCESS(
+-    COMMAND "${PYTHON_EXECUTABLE}" "-V"
+-    ERROR_VARIABLE PYTHON_VERSION_STRING
+-    ERROR_STRIP_TRAILING_WHITESPACE)
+-STRING(
+-    REGEX REPLACE "[A-Za-z\ ]*([0-9]+\\.[0-9]+\\.*[0-9]*)" "\\1"
+-    PYTHON_VERSION "${PYTHON_VERSION_STRING}")
+-MESSAGE(STATUS "Using Python: ${PYTHON_VERSION}")
+-SET(PYTHON_NEEDED_VERSION "2.5")
+-IF("${PYTHON_VERSION}" VERSION_LESS "${PYTHON_NEEDED_VERSION}")
+-    message(FATAL_ERROR "You need at least Python ${PYTHON_NEEDED_VERSION}, found: ${PYTHON_VERSION}")
+-ENDIF("${PYTHON_VERSION}" VERSION_LESS "${PYTHON_NEEDED_VERSION}")
+EOF
+
 mkdir build; cd build
-cmake -DPYTHON_EXECUTABLE=/usr/bin/python3.4 -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.4m.so -DCMAKE_INSTALL_PREFIX=$_WP ..
+cmake -DPYTHON_EXECUTABLE=/usr/bin/python3.4 -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.4m.so -DPYTHON_INCLUDE_DIR=/usr/include/python3.4 -DPYTHON_INCLUDE_DIR2=/usr/include/x86_64-linux-gnu/python3.4m -DCMAKE_INSTALL_PREFIX=$_WP ..
 make -j; make install
 
 cd $_WS
